@@ -2,8 +2,10 @@ package no.hvl.dat110.messaging;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 import no.hvl.dat110.TODO;
+import org.apache.maven.surefire.shared.utils.logging.MessageUtils;
 
 public class MessagingServer {
 
@@ -28,12 +30,18 @@ public class MessagingServer {
 
 		MessageConnection connection = null;
 
+		try {
+				Socket connectionSocket = welcomeSocket.accept();
+				connection = new MessageConnection(connectionSocket);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+
 		// TODO - START
 		// accept TCP connection on welcome socket and create messaging connection to be returned
+  //connection = new MessageConnection();
 
-		if (true)
-			throw new UnsupportedOperationException(TODO.method());
-		
 		// TODO - END
 		
 		return connection;
